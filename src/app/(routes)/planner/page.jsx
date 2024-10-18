@@ -154,7 +154,7 @@ function Page() {
               <h4>Steps:</h4>
               <ol>
                 {formatResponseAsList(response.response).map((step, index) => (
-                  <li key={index}>{step.trim()}</li>
+                  <ul key={index}>{step.trim()}</ul>
                 ))}
               </ol>
             </div>
