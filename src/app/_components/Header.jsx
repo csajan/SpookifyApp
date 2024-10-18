@@ -21,20 +21,7 @@ function Header() {
         <span className={styles.brandName}>Spookify</span>
       </div>
 
-      {isSignedIn ? (
-        <UserButton />
-      ) : (
-        <div className={styles.buttonsContainer}>
-          <Link href="/dashboard">
-            <button variant="outline" className={styles.button}>
-              Dashboard
-            </button>
-          </Link>
-          <Link href="/sign-in">
-            <button className={styles.button}>Get started</button>
-          </Link>
-        </div>
-      )}
+
     </div>
   );
 }
