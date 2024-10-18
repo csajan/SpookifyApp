@@ -61,3 +61,12 @@ body {
     margin-top: 20px;
   }
   
+  .response {
+    padding: 3em 2em;
+    color:white;
+    border: solid 1px #f4e78a;
+    border-radius: 50px;
+    margin: 3em 0;
+    text-align: left;
+    align-self: left;
+  }
