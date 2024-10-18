@@ -7,7 +7,7 @@ const apiKey =
 const client = new Mistral({ apiKey: apiKey });
 
 function Page() {
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState(null); // Changed to null initially
   const [category, setCategory] = useState({
     DIY: false,
     FOOD: false,
@@ -62,7 +62,7 @@ function Page() {
         : selectedCategory === "DIY"
         ? "DIY project"
         : "party idea"
-    }.`;
+    }. Provide simple steps, mentioning any extra items I might need to buy that are not part of the items I have at home. `;
 
     try {
       // Call the chat API with the prompt
@@ -72,19 +72,26 @@ function Page() {
           {
             role: "system",
             content:
-              "You are an assistant specialized in providing creative Halloween ideas based on a given category and available items. Return the data in the JSON format with {title: input: response:} ",
+              "You are an assistant specialized in providing creative Halloween ideas based on a given category and available items. Return the data in the JSON format with {title: input: response:}.",
           },
           { role: "user", content: promptForAi },
         ],
         temperature: 0.7,
       });
-
-      // Set the response from AI
-      setResponse(chatResponse.choices[0].message.content);
+      const aiData = JSON.parse(chatResponse.choices[0].message.content);
+      console.log("AI Response:", aiData.response);
+      // Set the response from AI (now an object)
+      setResponse(aiData);
     } catch (error) {
       console.error("Error fetching AI response:", error);
       setResponse("Sorry, something went wrong.");
     }
+  };
+
+  // Function to split the response into numbered steps
+  const formatResponseAsList = (responseText) => {
+    const steps = responseText.match(/\d+\.\s+[^\.]+\./g);
+    return steps || [responseText]; // Return the list or full text if no steps are found
   };
 
   return (
@@ -137,14 +144,27 @@ function Page() {
       <div>
         <button onClick={handleSubmit}>Submit</button>
       </div>
+
       <div style={{ marginTop: "20px" }}>
         {response ? (
-          <div>
-            <h3>Generated Idea:</h3>
+          typeof response === "object" ? (
+            <div>
+              <h3>{response.title}</h3>
+              <p>
+                <strong>Items needed:</strong> {response.input}
+              </p>
+              <h4>Steps:</h4>
+              <ol>
+                {formatResponseAsList(response.response).map((step, index) => (
+                  <li key={index}>{step.trim()}</li>
+                ))}
+              </ol>
+            </div>
+          ) : (
             <p>{response}</p>
-          </div>
+          )
         ) : (
-          <p>Submit the form to get a Halloween idea.</p>
+          <></>
         )}
       </div>
     </div>
