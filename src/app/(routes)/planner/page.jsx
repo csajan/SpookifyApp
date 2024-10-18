@@ -7,7 +7,7 @@ const apiKey =
 const client = new Mistral({ apiKey: apiKey });
 
 function Page() {
-  const [response, setResponse] = useState(null); // Changed to null initially
+  const [response, setResponse] = useState(null);
   const [category, setCategory] = useState({
     DIY: false,
     FOOD: false,
@@ -16,7 +16,6 @@ function Page() {
 
   const [prompt, setPrompt] = useState("");
 
-  // Handle checkbox change to allow only one checkbox to be checked at a time
   const handleCheckboxChange = (e) => {
     const { name } = e.target;
 
@@ -27,16 +26,13 @@ function Page() {
     });
   };
 
-  // Handle text input change
   const handlePromptChange = (e) => {
     setPrompt(e.target.value);
   };
 
-  // Make handleSubmit async to handle the API call
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Determine which option is selected
     const selectedCategory = Object.keys(category).find((key) => category[key]);
     const data = {
       category: selectedCategory,
@@ -55,7 +51,6 @@ function Page() {
 
     console.log(JSON.stringify(data, null, 2));
 
-    // Prepare prompt for the AI
     const promptForAi = `Based on the selected category (${selectedCategory}) and the items I have at home (${prompt}), please generate a Halloween-themed ${
       selectedCategory === "FOOD"
         ? "recipe"
@@ -65,7 +60,6 @@ function Page() {
     }. Provide simple steps, mentioning any extra items I might need to buy that are not part of the items I have at home. `;
 
     try {
-      // Call the chat API with the prompt
       const chatResponse = await client.chat.complete({
         model: "mistral-tiny",
         messages: [
@@ -80,7 +74,6 @@ function Page() {
       });
       const aiData = JSON.parse(chatResponse.choices[0].message.content);
       console.log("AI Response:", aiData.response);
-      // Set the response from AI (now an object)
       setResponse(aiData);
     } catch (error) {
       console.error("Error fetching AI response:", error);
@@ -88,10 +81,9 @@ function Page() {
     }
   };
 
-  // Function to split the response into numbered steps
   const formatResponseAsList = (responseText) => {
     const steps = responseText.match(/\d+\.\s+[^\.]+\./g);
-    return steps || [responseText]; // Return the list or full text if no steps are found
+    return steps || [responseText];
   };
 
   return (
@@ -132,7 +124,6 @@ function Page() {
         </label>
       </div>
 
-      {/* Text input */}
       <div>
         <label>
           Enter your prompt:
@@ -140,7 +131,6 @@ function Page() {
         </label>
       </div>
 
-      {/* Submit button */}
       <div>
         <button onClick={handleSubmit}>Submit</button>
       </div>
