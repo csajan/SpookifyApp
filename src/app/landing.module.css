@@ -1,14 +1,52 @@
-
 .container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 100vh;
+    width: 100vw;
+    padding: 2em 2em;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    height: 100vh; /* This will vertically center the content */
+    justify-items: center;
+    background-color: #2b0047;
   }
-  
-  .heading {
-    font-size: 1.25rem; /* Equivalent to text-xl */
-    color: #4a4a4a; /* Equivalent to text-gray-800 */
-  }
-  
+
+.imageContainer {
+  display: grid;
+  height: 30em;
+  width: 30em;
+}
+
+.rightside{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  padding: 1em 7em 0em 0em;
+}
+
+.image{
+  display: grid;
+  border-radius: 50px;
+  height: 33em;
+  width: 33em;
+}
+
+.introduction{
+  color: white;
+  font-size: 1em;
+  padding: 1em 0em;
+}
+
+.titles{
+  display: grid;
+  height: 20em;
+  width: 40em; 
+  padding: 0 0 3em 0;
+}
+
+.button{
+  border-radius: 50px;
+  background-color: #f4e78a;
+  padding: 1em 3em;
+  color: #2b0047;
+}
