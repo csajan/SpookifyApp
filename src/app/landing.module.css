@@ -1,0 +1,14 @@
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh; /* This will vertically center the content */
+  }
+  
+  .heading {
+    font-size: 1.25rem; /* Equivalent to text-xl */
+    color: #4a4a4a; /* Equivalent to text-gray-800 */
+  }
+  
