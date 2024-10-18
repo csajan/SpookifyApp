@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #2b0047;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of viewport */
+  }
+  
+  .container {
+    text-align: center;
+  }
+  
+  .header {
+    font-size: 2rem; /* Larger font size for header */
+    margin-bottom: 20px;
+  }
+  
+  .category {
+    margin: 10px 0;
+    text-align: left; /* Align checkbox labels to the left */
+  }
+  
+  .checkbox-label {
+    font-size: 1.5rem; /* Larger font size for category labels */
+    margin-left: 10px; /* Margin between checkbox and label */
+  }
+  
+  .input-section {
+    margin: 20px 0;
+  }
+  
+  .input-label {
+    font-size: 1rem;
+    margin: 2em;
+  }
+  
+  .text-input {
+    padding: 10px;
+    font-size: 1rem; /* Font size for text input */
+    margin: 2em 0 2em 1em;
+    width: 12em;
+  }
+  
+  .submit-section {
+    margin: 20px 0;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    font-size: 1rem; /* Font size for button */
+    background-color: #ff8c00; /* Example button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .response-section {
+    margin-top: 20px;
+  }
+  

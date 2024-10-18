@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Mistral } from "@mistralai/mistralai";
+import "./page.css";
 
 const apiKey =
   process.env.MISTRAL_API_KEY || "Q9wYLD8kvpWmXkYdpeDYGjpwfEbvAxOV";
@@ -16,7 +17,6 @@ function Page() {
 
   const [prompt, setPrompt] = useState("");
 
-  // Handle checkbox change to allow only one checkbox to be checked at a time
   const handleCheckboxChange = (e) => {
     const { name } = e.target;
 
@@ -27,16 +27,13 @@ function Page() {
     });
   };
 
-  // Handle text input change
   const handlePromptChange = (e) => {
     setPrompt(e.target.value);
   };
 
-  // Make handleSubmit async to handle the API call
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Determine which option is selected
     const selectedCategory = Object.keys(category).find((key) => category[key]);
     const data = {
       category: selectedCategory,
@@ -53,9 +50,6 @@ function Page() {
       return;
     }
 
-    console.log(JSON.stringify(data, null, 2));
-
-    // Prepare prompt for the AI
     const promptForAi = `Based on the selected category (${selectedCategory}) and the items I have at home (${prompt}), please generate a Halloween-themed ${
       selectedCategory === "FOOD"
         ? "recipe"
@@ -65,7 +59,6 @@ function Page() {
     }.`;
 
     try {
-      // Call the chat API with the prompt
       const chatResponse = await client.chat.complete({
         model: "mistral-tiny",
         messages: [
@@ -79,7 +72,6 @@ function Page() {
         temperature: 0.7,
       });
 
-      // Set the response from AI
       setResponse(chatResponse.choices[0].message.content);
     } catch (error) {
       console.error("Error fetching AI response:", error);
@@ -88,10 +80,10 @@ function Page() {
   };
 
   return (
-    <div>
-      <h2>Simple Form</h2>
+    <div className="container">
+      <h2 className="header">Halloween Idea Generator</h2>
 
-      <div>
+      <div className="category">
         <label>
           <input
             type="checkbox"
@@ -99,10 +91,10 @@ function Page() {
             checked={category.DIY}
             onChange={handleCheckboxChange}
           />
-          DIY
+          <span className="checkbox-label">DIY</span>
         </label>
       </div>
-      <div>
+      <div className="category">
         <label>
           <input
             type="checkbox"
@@ -110,10 +102,10 @@ function Page() {
             checked={category.FOOD}
             onChange={handleCheckboxChange}
           />
-          FOOD
+          <span className="checkbox-label">FOOD</span>
         </label>
       </div>
-      <div>
+      <div className="category">
         <label>
           <input
             type="checkbox"
@@ -121,23 +113,27 @@ function Page() {
             checked={category.PARTY}
             onChange={handleCheckboxChange}
           />
-          PARTY
+          <span className="checkbox-label">PARTY</span>
         </label>
       </div>
 
-      {/* Text input */}
-      <div>
-        <label>
-          Enter your prompt:
-          <input type="text" value={prompt} onChange={handlePromptChange} />
+      <div className="input-section">
+        <label className="input-label">
+          Enter your items:
+          <input
+            type="text"
+            value={prompt}
+            onChange={handlePromptChange}
+            className="text-input"
+          />
         </label>
       </div>
 
-      {/* Submit button */}
-      <div>
-        <button onClick={handleSubmit}>Submit</button>
+      <div className="submit-section">
+        <button onClick={handleSubmit} className="submit-button">Submit</button>
       </div>
-      <div style={{ marginTop: "20px" }}>
+      
+      <div className="response-section">
         {response ? (
           <div>
             <h3>Generated Idea:</h3>
