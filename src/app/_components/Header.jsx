@@ -12,11 +12,11 @@ function Header() {
     <div className={styles.header}>
       <div className={styles.logoContainer}>
         <Image
-          // src={"/pumpkin.png"}
+          src={"/pumpkin.png"}
           alt="Logo"
           width={50}
           height={55}
-          priority={false}
+          priority={true}
         ></Image>
         <span className={styles.brandName}>Spookify</span>
       </div>
