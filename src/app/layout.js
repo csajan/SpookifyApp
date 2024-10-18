@@ -22,9 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider
       publishableKey={"pk_test_bWFzc2l2ZS1tdWxlLTkzLmNsZXJrLmFjY291bnRzLmRldiQ"}
-      signInForceRedirectUrl={
-        process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL
-      }
+      signInForceRedirectUrl={"/planner"}
     >
       <html lang="en">
         <body
