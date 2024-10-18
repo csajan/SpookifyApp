@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Mistral } from "@mistralai/mistralai";
+import "./page.css";
 
 const apiKey =
   process.env.MISTRAL_API_KEY || "Q9wYLD8kvpWmXkYdpeDYGjpwfEbvAxOV";
@@ -87,10 +88,10 @@ function Page() {
   };
 
   return (
-    <div>
-      <h2>Simple Form</h2>
+    <div className="container">
+      <h2 className="header">Halloween Idea Generator</h2>
 
-      <div>
+      <div className="category">
         <label>
           <input
             type="checkbox"
@@ -98,10 +99,10 @@ function Page() {
             checked={category.DIY}
             onChange={handleCheckboxChange}
           />
-          DIY
+          <span className="checkbox-label">DIY</span>
         </label>
       </div>
-      <div>
+      <div className="category">
         <label>
           <input
             type="checkbox"
@@ -109,10 +110,10 @@ function Page() {
             checked={category.FOOD}
             onChange={handleCheckboxChange}
           />
-          FOOD
+          <span className="checkbox-label">FOOD</span>
         </label>
       </div>
-      <div>
+      <div className="category">
         <label>
           <input
             type="checkbox"
@@ -120,22 +121,29 @@ function Page() {
             checked={category.PARTY}
             onChange={handleCheckboxChange}
           />
-          PARTY
+          <span className="checkbox-label">PARTY</span>
         </label>
       </div>
 
-      <div>
-        <label>
-          Enter your prompt:
-          <input type="text" value={prompt} onChange={handlePromptChange} />
+      <div className="input-section">
+        <label className="input-label">
+          Enter your items:
+          <input
+            type="text"
+            value={prompt}
+            onChange={handlePromptChange}
+            className="text-input"
+          />
         </label>
       </div>
 
-      <div>
-        <button onClick={handleSubmit}>Submit</button>
+      <div className="submit-section">
+        <button onClick={handleSubmit} className="submit-button">
+          Submit
+        </button>
       </div>
 
-      <div style={{ marginTop: "20px" }}>
+      <div className="response-section">
         {response ? (
           typeof response === "object" ? (
             <div>
