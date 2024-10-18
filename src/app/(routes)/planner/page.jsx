@@ -89,7 +89,7 @@ function Page() {
 
   return (
     <div className="container">
-      <h2 className="header">Halloween Idea Generator</h2>
+      <h2 className="header">😈 Spookify Your Activities 😈</h2>
 
       <div className="category">
         <label>
@@ -152,7 +152,7 @@ function Page() {
                 <strong>Items needed:</strong> {response.input}
               </p>
               <h4>Steps:</h4>
-              <ol>
+              <ol className="response">
                 {formatResponseAsList(response.response).map((step, index) => (
                   <ul key={index}>{step.trim()}</ul>
                 ))}
